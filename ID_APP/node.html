@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+<title>Save Web Form Data to Spreadsheets - Contact Form</title>
+
+</head>
+<body>
+  <form id="myForm">
+    <label>Full Name</label>
+    <br/>
+    <input name="full_name" class="name_input" />
+    <br/>
+    <label>Password</label>
+    <br/>
+    <input name="email" class="email_input" />
+    <br/>
+    <label>Loggin Time</label>
+    <br/>
+    <textarea name="message" class="message_input">
+    </textarea>
+    <br/>
+    <br/>
+  </form>
+  <button onclick="downloadFile()">Log In</button>
+  <button onclick="downloadFinishedFile()">Download</button>
+  <br/>
+  <br/>
+  <p>Already logged in?</p>
+  <br/>
+  <form id="myForm2">
+    <label>Full Name</label>
+    <br/>
+    <input name="full_name" class="name_input2" />
+    <br/>
+    <label>Password</label>
+    <br/>
+    <input name="email" class="email_input2" />
+    <br/>
+    <label>Loggout Time</label>
+    <br/>
+    <textarea name="message" class="message_input2">
+    </textarea>
+    <br/>
+    <br/>
+  </form>
+  <button onclick="loggout()">Log Out</button>
+
+</body>
+<script src="./app.js"></script>
+</html>

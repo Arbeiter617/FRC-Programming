@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Dynamsoft JavaScript Barcode Scanner</title>
+        <script src="https://cdn.jsdelivr.net/npm/dynamsoft-javascript-barcode@9.0.0/dist/dbr.js"></script>
+    </head>
+<body>
+    <script>
+        window.onload = async function () {
+            try {
+                await Dynamsoft.DBR.BarcodeScanner.loadWasm();
+                await initBarcodeScanner();
+            } catch (ex) {
+                alert(ex.message);
+                throw ex;
+            }
+        };
+        let scanner = null;
+        async function initBarcodeScanner() {
+            scanner = await Dynamsoft.DBR.BarcodeScanner.createInstance();
+            scanner.onFrameRead = results => {console.log(results);};
+            scanner.onUnduplicatedRead = (txt, result) => {};
+            await scanner.show();
+        }
+    </script>
+
+<div id="barcodeScanner">
+    <span id='loading-status' style='font-size:x-large'>Loading Library...</span>
+</div>
+<script>
+    
+    async function initBarcodeScanner() {
+        scanner = await Dynamsoft.DBR.BarcodeScanner.createInstance();
+        scanner.onFrameRead = results => {console.log(results);};
+        scanner.onUnduplicatedRead = (txt, result) => {};
+        document.getElementById('barcodeScanner').appendChild(scanner.getUIElement());
+        document.getElementById('loading-status').hidden = true;
+        await scanner.show();
+    }
+</script>
+
+
+
+<div>
+    Barcode Result: <a id='result'>N/A</a>
+</div>
+<script>
+  
+    scanner.onFrameRead = results => {
+        console.log(results);
+        for (let result of results) {
+            document.getElementById('result').innerHTML = result.barcodeFormatString + ", " + result.barcodeText;
+        }
+    };
+   
+</script>
+
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #barcodeScanner {
+        text-align: center;
+        font-size: medium;
+        height: 40vh;
+        width: 40vw;
+    }
+</style>
+
+<style>
+    #videoview {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+    }
+
+    #videoContainer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1
+    }
+
+    #overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        object-fit: contain
+    }
+</style>
+
+<div id="videoview">
+    <div class="dce-video-container" id="videoContainer"></div>
+    <canvas id="overlay"></canvas>
+</div>
+    
+</body>
+</html>
